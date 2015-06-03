@@ -15,11 +15,13 @@
 #include "KalOdeSys.hpp"
 
 namespace kalmia {
-	template<class State, class Time>
-	KalOdeSys<State, Time>::KalOdeSys ()
-		: state_ ()
-		, state_dt_ ()
-		, time_ ()
+	namespace odesys {
+		template<class State, class Time>
+		KalOdeSys<State, Time>::KalOdeSys ()
+			: state_ ()
+			, state_dt_ ()
+			, time_ ()
 		{}
+	}
 
 }
