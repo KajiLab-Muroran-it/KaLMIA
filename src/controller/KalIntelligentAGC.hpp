@@ -30,12 +30,15 @@ namespace kalmia {
 		class KalIntelligentAGC : public KalController {
 		public:
 			KalIntelligentAGC ();
+			KalIntelligentAGC (bool clip, double threshold = 1.);
 			virtual ~KalIntelligentAGC () = default;
 
 			void Update (double t, double pv) override;
 			double Output () override;
 
 		private:
+			bool clipping_enabled_;
+			double clipping_thr_;
 			double previous_value_, current_gain_, next_gain_;
 
 			KalIntelligentAGC (KalIntelligentAGC&&) = delete;
