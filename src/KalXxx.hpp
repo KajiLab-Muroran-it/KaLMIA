@@ -25,10 +25,6 @@ namespace kalmia {
 	public:
 		virtual ~KalXxx() = default;
 		
-	private:
-		KalXxx(KalXxx&&) = delete;
-		KalXxx& operator =(KalXxx const&) = delete;
-		KalXxx& operator =(KalXxx&&) = delete;
 	};
 }
 
