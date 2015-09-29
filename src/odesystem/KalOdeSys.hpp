@@ -104,9 +104,6 @@ namespace kalmia {
 						}
 
 		private:
-			KalOdeSys (KalOdeSys&&) = delete;
-			KalOdeSys& operator =(KalOdeSys const&) = delete;
-			KalOdeSys& operator =(KalOdeSys&&) = delete;
 			State state_, state_dt_;
 			Time time_;
 		};

@@ -27,7 +27,7 @@ namespace kalmia {
 			KalVanDerPol (double omega, double epsilon, double G);
 
 			virtual void ComputeDerivative (const State& x, State& dxdt, Time t) override;
-			void SetExternalForce (double f) { f_ = f }
+			void SetExternalForce (double f) { f_ = f; }
 
 		private:
 			double omega_;

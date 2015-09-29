@@ -11,23 +11,27 @@
 /*                                                            */
 /**************************************************************/
 
-// KalAutoGainController.cpp
-#include <controller/KalAutoGainController.hpp>
+// KalNoncopyable.hpp
+
+// Noncopyable base class, which is similar to boost.KalNoncopyable.
+// In fact, I want to use boost.KalNoncopyable
+// But I don't sure how to include it into my library in a reasonable way
+// (It not stands by headerfile itself, but also requires another header files in boost... ;P)
+
+
+#ifndef KALNONCOPYABLE_HPP
+#define KALNONCOPYABLE_HPP
+
 namespace kalmia {
-	namespace controller {
-		KalAutoGainController::KalAutoGainController ()
-			: gain_ (0), previous_value_ (0)
-		{}
+namespace util {
+class KalNoncopyable {
+protected:
+	KalNoncopyable () = default;
+	virtual ~KalNoncopyable () = default;
 
-		void KalAutoGainController::Update (double t, double pv){
-			if ((abs (pv) < abs (previous_value_)) && ((previous_value_*gain_) <= 0)){
-				gain_ = 1 / previous_value_;
-			}
-			previous_value_ = pv;
-		}
-
-		double KalAutoGainController::Output (){
-			return abs (gain_);
-		}
-	}
+	KalNoncopyable (const KalNoncopyable&) = delete;
+	KalNoncopyable& operator=(const KalNoncopyable&) = delete;
+};
 }
+}
+#endif

@@ -17,22 +17,19 @@
 #ifndef KALCONTROLLER_HPP
 #define KALCONTROLLER_HPP
 
+#include "util/KalNoncopyable.hpp"
+
 namespace kalmia {
-	namespace controller {
-		class KalController {
-		public:
-			KalController () = default;
-			virtual ~KalController () = default;
+namespace controller {
+class KalController : kalmia::util::KalNoncopyable{
+public:
+	KalController () = default;
+	virtual ~KalController () = default;
 
-			virtual void Update (double t, double pv) = 0;
-			virtual double Output () = 0;
-
-		private:
-			KalController (KalController&&) = delete;
-			KalController& operator =(KalController const&) = delete;
-			KalController& operator =(KalController&&) = delete;
-		};
-	}
+	virtual void Update (double t, double pv) = 0;
+	virtual double Output () = 0;
+};
+}
 }
 
 #ifdef KALMIA_HEADER_ONLY

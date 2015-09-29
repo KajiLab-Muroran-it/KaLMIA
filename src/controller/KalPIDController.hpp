@@ -13,7 +13,7 @@
 
 // KalPIDController.hpp
 
-// PIDといいつつも実装はPI-D（）
+// PIDといいつつも実装はPI-D（微分先行PID制御）。
 
 
 
@@ -48,11 +48,7 @@ namespace kalmia {
 
 			double Output () override;
 
-			//private:
-			KalPIDController (KalPIDController&&) = delete;
-			KalPIDController& operator =(KalPIDController const&) = delete;
-			KalPIDController& operator =(KalPIDController&&) = delete;
-
+		private:
 			const bool isRotational;
 
 			bool limitEnabled;

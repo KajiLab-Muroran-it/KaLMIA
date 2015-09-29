@@ -31,11 +31,7 @@ namespace kalmia {
 			double Output () override;
 
 		private:
-			double previous_value, gain;
-
-			KalAutoGainController (KalAutoGainController&&) = delete;
-			KalAutoGainController& operator =(KalAutoGainController const&) = delete;
-			KalAutoGainController& operator =(KalAutoGainController&&) = delete;
+			double previous_value_, gain_;
 		};
 	}
 
