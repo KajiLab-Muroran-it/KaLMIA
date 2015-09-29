@@ -2,7 +2,7 @@
 /*                                                            */
 /*     ================[ KaLMIA Library ]================     */
 /*                                                            */
-/*            Kaji-Lab Magnifier Integrated Assets            */
+/*           Kaji-Lab Moderate Instrumental Assets            */
 /*                                                            */
 /*     ============== " Be Ambitious For " ==============     */
 /*                                                            */
