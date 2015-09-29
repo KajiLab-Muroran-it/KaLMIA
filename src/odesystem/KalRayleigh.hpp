@@ -11,24 +11,32 @@
 /*                                                            */
 /**************************************************************/
 
-// KalVanDerPol.cpp
-#include "KalVANDERPOL.hpp"
+// KalRayleigh.hpp
+#ifndef KALRAYLEIGH_HPP
+#define KALRAYLEIGH_HPP
+
+#include "KalOdeSys.hpp"
 
 namespace kalmia {
 	namespace odesys {
-		template <class State, class Time>
-		KalVanDerPol<State, Time>::KalVanDerPol (double omega, double epsilon, double G)
-			: KalOdeSys<State, Time> ()
-			, omega_ (omega)
-			, epsilon_ (epsilon)
-			, G_ (G)
-			, f_ ()
-		{}
+		template <class State = std::array<double, 2>, class Time = double>
+		class KalRayleigh : public KalOdeSys<State, Time> {
+		public:
+			using StateType = State;
 
-		template <class State, class Time>
-		void KalVanDerPol<State, Time>::ComputeDerivative (const State& x, State& dxdt, Time t){
-			dxdt[0] = x[1];
-			dxdt[1] = G_*f_ + epsilon_*(1 - x[0] * x[0])*x[1] - omega_*omega_*x[0];
-		}
+			KalRayleigh (double omega, double epsilon, double G);
+
+			virtual void ComputeDerivative (const State& x, State& dxdt, Time t) override;
+			void SetExternalForce (double f) { f_ = f; }
+
+		private:
+			double omega_;
+			double epsilon_;
+			double G_;
+			double f_;
+		};
 	}
 }
+
+#include "KalRayleigh.cpp"
+#endif

@@ -11,13 +11,13 @@
 /*                                                            */
 /**************************************************************/
 
-// KalVanDerPol.cpp
+// KalRayleigh.cpp
 #include "KalVANDERPOL.hpp"
 
 namespace kalmia {
 	namespace odesys {
 		template <class State, class Time>
-		KalVanDerPol<State, Time>::KalVanDerPol (double omega, double epsilon, double G)
+		KalRayleigh<State, Time>::KalRayleigh (double omega, double epsilon, double G)
 			: KalOdeSys<State, Time> ()
 			, omega_ (omega)
 			, epsilon_ (epsilon)
@@ -26,9 +26,9 @@ namespace kalmia {
 		{}
 
 		template <class State, class Time>
-		void KalVanDerPol<State, Time>::ComputeDerivative (const State& x, State& dxdt, Time t){
+		void KalRayleigh<State, Time>::ComputeDerivative (const State& x, State& dxdt, Time t){
 			dxdt[0] = x[1];
-			dxdt[1] = G_*f_ + epsilon_*(1 - x[0] * x[0])*x[1] - omega_*omega_*x[0];
+			dxdt[1] = G_*f_ + epsilon_*(1 - x[1] * x[1])*x[1] - omega_*omega_*x[0];
 		}
 	}
 }
