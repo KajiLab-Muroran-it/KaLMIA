@@ -18,7 +18,6 @@
 #define KALFIRFACTORY_HPP
 
 #include <array>
-#include <vector>
 #include <memory>
 #include <algorithm>
 #include <numeric>
