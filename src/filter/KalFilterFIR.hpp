@@ -11,25 +11,42 @@
 /*                                                            */
 /**************************************************************/
 
-// KalControllr.hpp
-// TODO: Modify supported type from double to template should better.
+// KalFilterFIR.hpp
+// Finite impulse response filter
+#ifndef KALFILTERFIR_HPP
+#define KALFILTERFIR_HPP
 
-#ifndef KALFILTERBASE_HPP
-#define KALFILTERBASE_HPP
-
-#include "util/KalNoncopyable.hpp"
+#include <assert.h>
+#include <algorithm>
+#include <array>
+#include <vector>
+#include <deque>
+#include <numeric>
+#include "filter/KalFilterBase.hpp"
 
 namespace kalmia {
-namespace filter {
-class KalFilterBase : kalmia::util::KalNoncopyable{
+namespace filter{
+
+template <size_t N>
+class KalFilterFIR : public KalFilterBase{
 public:
-	KalFilterBase () = default;
-	virtual ~KalFilterBase () = default;
+	template<class InputIterator>
+	KalFilterFIR (InputIterator factors_begin, InputIterator factors_end);
 
-	virtual void Update (double t, double pv) = 0;
-	virtual double Output () = 0;
+	virtual ~KalFilterFIR() = default;
+	virtual void Update (double t, double pv);
+	virtual double Output() override;
+
+private:
+	const std::array<double, N> factors_;
+	std::deque<double> buffer_;
+	
+	template<class InputIterator>
+	static std::array<double, N> InitializeFactors (InputIterator factors_begin, InputIterator factors_end);
 };
+
 }
 }
 
+#include "KalFilterFIR.cpp"
 #endif
