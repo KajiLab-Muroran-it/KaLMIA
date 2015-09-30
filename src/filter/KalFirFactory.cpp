@@ -47,7 +47,15 @@ std::unique_ptr<KalFilterFIR<N>> GenerateKalFilterEMA (double alpha){
 	return std::make_unique <KalFilterFIR<N>> (ar_.begin (), ar_.end ());
 }
 
-
+template <size_t N, class InputIterator>
+std::unique_ptr<KalFilterFIR<N>> GenerateKalFilterLPC (InputIterator coefficient_begin, InputIterator coefficient_end){
+	std::array<double, N> ar_;
+	if(N%2) assert (std::distance(coefficient_begin, coefficient_end) == N/2+1);
+	else assert (std::distance (coefficient_begin, coefficient_end) == N / 2);
+	std::copy (coefficient_begin, coefficient_end, ar_.begin ());
+	std::copy (coefficient_begin, coefficient_end, ar_.rbegin());
+	return std::make_unique <KalFilterFIR<N>> (ar_.begin (), ar_.end ());
+}
 
 }
 }
