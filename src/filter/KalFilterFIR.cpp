@@ -25,7 +25,7 @@ KalFilterFIR<N>::KalFilterFIR (InputIterator factors_begin, InputIterator factor
 , buffer_ (N)
 { }
 template<size_t N>
-void KalFilterFIR<N>::Update (double t, double pv){
+void KalFilterFIR<N>::Update (double pv){
 	buffer_.push_front (pv);
 	buffer_.pop_back();
 }

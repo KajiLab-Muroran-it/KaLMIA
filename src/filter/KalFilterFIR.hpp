@@ -33,7 +33,9 @@ public:
 	KalFilterFIR (InputIterator factors_begin, InputIterator factors_end);
 
 	virtual ~KalFilterFIR() = default;
-	virtual void Update (double t, double pv);
+	virtual inline void Update (double t, double pv) override { Update (pv); };
+	virtual void Update (double pv);
+
 	virtual double Output() override;
 
 private:
