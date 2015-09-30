@@ -19,7 +19,6 @@
 #include <assert.h>
 #include <algorithm>
 #include <array>
-#include <vector>
 #include <deque>
 #include <numeric>
 #include "filter/KalFilterBase.hpp"
