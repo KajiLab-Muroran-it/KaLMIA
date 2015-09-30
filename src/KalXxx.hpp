@@ -21,7 +21,7 @@
 #define KALXXX_HPP
 
 namespace kalmia {
-	class KalXxx{
+	class KalXxx : kalmia::util::KalNoncopyable{
 	public:
 		virtual ~KalXxx() = default;
 		
