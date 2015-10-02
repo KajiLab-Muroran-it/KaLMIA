@@ -25,17 +25,17 @@ namespace kalmia {
 namespace chrono {
 	// Sphere
 	template <class T>
-	inline T MassToDens (T mass, T radius){
+	inline T MassToDens (T radius, T mass){
 		return mass / (4. / 3. * ::chrono::CH_C_PI * radius * radius * radius);
 	}
 	// Cylinder
 	template <class T>
-	inline T MassToDens (T mass, T radius, T height){
+	inline T MassToDens (T radius, T height, T mass){
 		return mass / (::chrono::CH_C_PI * radius * radius * height);
 	}
 	// Box
 	template <class T>
-	inline T MassToDens (T mass, T depth, T height, T width){
+	inline T MassToDens (T depth, T height, T width, T mass){
 		return mass / (depth * height * width);
 	}
 
