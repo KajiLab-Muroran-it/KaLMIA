@@ -48,6 +48,24 @@ namespace chrono {
 		const ::chrono::ChVector<> wvel = body->GetWvel_loc();
 		return (body->GetMass() * vel.Dot (vel) + wvel.Dot (body->GetInertia() * wvel)) / 2.;
 	}
+
+	// It works, maybe...
+	::chrono::ChSharedPtr<::chrono::ChBody> ChBodyCopyEverything (::chrono::ChSharedPtr<::chrono::ChBody> source, ::chrono::ChSharedPtr<::chrono::ChBody> target){
+		target->Copy (source.get_ptr ());
+
+		auto markers =  source->GetMarkerList ();
+		for (auto elem : markers){
+			target->AddMarker (::chrono::ChSharedPtr<::chrono::ChMarker>(elem));
+		}
+		
+		auto forces = source->GetForceList ();
+		for (auto elem : forces){
+			target->AddForce (::chrono::ChSharedPtr<::chrono::ChForce> (elem));
+		}
+
+		target->GetCollisionModel ()->AddCopyOfAnotherModel (source->GetCollisionModel());
+		return target;
+	}
 }
 }
 
