@@ -30,7 +30,7 @@ template <size_t N>
 class KalFilterFIR : public KalFilterBase{
 public:
 	template<class InputIterator>
-	KalFilterFIR (InputIterator factors_begin, InputIterator factors_end);
+	KalFilterFIR (InputIterator coefficients_begin, InputIterator coefficients_end);
 
 	virtual ~KalFilterFIR() = default;
 	virtual inline void Update (double t, double pv) override { Update (pv); };
@@ -39,11 +39,11 @@ public:
 	virtual double Output() override;
 
 private:
-	const std::array<double, N> factors_;
+	const std::array<double, N> coefficients_;
 	std::deque<double> buffer_;
 	
 	template<class InputIterator>
-	static std::array<double, N> InitializeFactors (InputIterator factors_begin, InputIterator factors_end);
+	static std::array<double, N> InitializeFactors (InputIterator coefficients_begin, InputIterator coefficients_end);
 };
 
 }

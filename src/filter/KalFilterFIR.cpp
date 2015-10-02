@@ -20,8 +20,8 @@ namespace filter{
 // public
 template<size_t N>
 template<class InputIterator>
-KalFilterFIR<N>::KalFilterFIR (InputIterator factors_begin, InputIterator factors_end)
-: factors_ (InitializeFactors(factors_begin, factors_end))
+KalFilterFIR<N>::KalFilterFIR (InputIterator coefficients_begin, InputIterator coefficients_end)
+: coefficients_ (InitializeFactors(coefficients_begin, coefficients_end))
 , buffer_ (N)
 { }
 template<size_t N>
@@ -31,16 +31,16 @@ void KalFilterFIR<N>::Update (double pv){
 }
 template<size_t N>
 double KalFilterFIR<N>::Output (){
-	return std::inner_product(buffer_.begin(), buffer_.end(), factors_.begin(), 0.);
+	return std::inner_product(buffer_.begin(), buffer_.end(), coefficients_.begin(), 0.);
 }
 
 // private
 template<size_t N>
 template<class InputIterator>
-static std::array<double, N> KalFilterFIR<N>::InitializeFactors (InputIterator factors_begin, InputIterator factors_end){
-	assert (std::distance(factors_begin, factors_end) == N);
+static std::array<double, N> KalFilterFIR<N>::InitializeFactors (InputIterator coefficients_begin, InputIterator coefficients_end){
+	assert (std::distance(coefficients_begin, coefficients_end) == N);
 	std::array<double, N> ar_;
-	std::copy (factors_begin, factors_end, ar_.begin ());
+	std::copy (coefficients_begin, coefficients_end, ar_.begin ());
 	return ar_;
 }
 
