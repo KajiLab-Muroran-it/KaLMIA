@@ -11,32 +11,16 @@
 /*                                                            */
 /**************************************************************/
 
-// KalAutoGainController.hpp
-// Library header template
+// KalController.hpp
 
-#ifndef KALAUTOGAINCONTROLLER_HPP
-#define KALAUTOGAINCONTROLLER_HPP
 
-#include <cmath>
-#include <controller/KalControllerBase.hpp>
+#ifndef KALCONTROLLER_HPP
+#define KALCONTROLLER_HPP
 
-namespace kalmia {
-	namespace controller {
-		class KalAutoGainController : public KalControllerBase {
-		public:
-			KalAutoGainController ();
-			virtual ~KalAutoGainController () = default;
-
-			void Update (double t, double pv) override;
-			double Output () override;
-
-		private:
-			double previous_value_, gain_;
-		};
-	}
-
+#include "filter/KalFilterBase.hpp"
+namespace kalmia{
+namespace controller{
+using KalControllerBase = ::kalmia::filter::KalFilterBase;
 }
-#ifdef KALMIA_HEADER_ONLY
-#include <controller/KalAutoGainController.cpp>
-#endif
+}
 #endif

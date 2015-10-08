@@ -80,11 +80,11 @@ int main(int argc, char** argv[])
 #define KALINTELLIGENTAGC_HPP
 
 #include <cmath>
-#include <controller/KalController.hpp>
+#include <controller/KalControllerBase.hpp>
 
 namespace kalmia {
 	namespace controller {
-		class KalIntelligentAGC : public KalController {
+		class KalIntelligentAGC : public KalControllerBase {
 		public:
 			KalIntelligentAGC ();
 			KalIntelligentAGC (bool clip, double threshold = 1.);
