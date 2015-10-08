@@ -21,11 +21,15 @@
 #define KALXXX_HPP
 
 namespace kalmia {
-	class KalXxx : kalmia::util::KalNoncopyable{
-	public:
-		virtual ~KalXxx() = default;
-		
-	};
+namespace category{
+
+class KalXxx : kalmia::util::KalNoncopyable{
+public:
+	virtual ~KalXxx() = default;
+	
+};
+
+}
 }
 
 // If you used templates in your class/function,

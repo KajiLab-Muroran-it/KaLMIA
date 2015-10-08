@@ -15,5 +15,6 @@
 #include "KalXxx.hpp"
 
 namespace kalmia {
-
+namespace category{
+}
 }
