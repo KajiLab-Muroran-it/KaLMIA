@@ -45,6 +45,9 @@ private:
 	KalDifferentialElement differential_;
 };
 
+using KalPIDFramePositionalPID = KalPIDFramePositional<KalProportionalElement, KalIntegralElement, KalDifferentialElement>;
+using KalPIDFramePositionalPI_D = KalPIDFramePositional<KalProportionalElement, KalIntegralElement, KalDifferentialElementForward>;
+using KalPIDFramePositionalI_PD = KalPIDFramePositional<KalProportionalElementForward, KalIntegralElement, KalDifferentialElementForward>;
 }
 }
 
