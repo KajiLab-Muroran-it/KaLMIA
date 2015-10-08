@@ -26,10 +26,10 @@ public:
 	KalIntegralElement(double Ki) : gain_ (Ki), total_error_(0.) {};
 	virtual ~KalIntegralElement() = default;
 
+private:
 	virtual void Update_impl (double dt, double process_value, double error) override { total_error_ += error*dt; };
 	virtual double Output_impl () override { return gain_ * total_error_; };
 
-private:
 	const double gain_;
 	double total_error_;
 };

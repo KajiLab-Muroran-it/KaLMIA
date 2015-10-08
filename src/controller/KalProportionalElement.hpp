@@ -26,10 +26,10 @@ public:
 	KalProportionalElement (double Kp) : gain_ (Kp), error_(0.) {};
 	virtual ~KalProportionalElement() = default;
 
+private:
 	virtual void Update_impl (double dt, double process_value, double error) override { error_ = error; };
 	virtual double Output_impl () override { return gain_ * error_; };
 
-private:
 	const double gain_;
 	double error_;
 };

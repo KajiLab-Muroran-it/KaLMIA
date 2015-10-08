@@ -27,9 +27,10 @@ public:
 	virtual ~KalPIDElementBase () = default;
 
 	void Update (double dt, double process_value, double error) { Update_impl (dt, process_value, error); };
-	virtual void Update_impl (double dt, double process_value, double error) = 0;
-
 	double Output () { return Output_impl (); };
+	
+private:
+	virtual void Update_impl (double dt, double process_value, double error) = 0;
 	virtual double Output_impl () = 0;
 };
 
