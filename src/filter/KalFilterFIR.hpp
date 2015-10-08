@@ -34,6 +34,7 @@ public:
 
 	virtual ~KalFilterFIR() = default;
 	
+	using KalFilterBase::Update;
 	// Additional interface
 	void Update (double process_value) { Update_impl (process_value); };
 	
