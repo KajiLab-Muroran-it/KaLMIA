@@ -27,7 +27,7 @@ KalPIDFramePositional<ProportionalElement, IntegralElement, DifferentialElement>
 {}
 
 template <class ProportionalElement, class IntegralElement, class DifferentialElement>
-void KalPIDFramePositional<ProportionalElement, IntegralElement, DifferentialElement>::Update (double t, double process_value){
+void KalPIDFramePositional<ProportionalElement, IntegralElement, DifferentialElement>::Update_impl (double t, double process_value){
 	double dt = t - t_prev_;
 	if (dt > 0.){
 		double error = setpoint_ - process_value;
@@ -40,7 +40,7 @@ void KalPIDFramePositional<ProportionalElement, IntegralElement, DifferentialEle
 
 
 template <class ProportionalElement, class IntegralElement, class DifferentialElement>
-double KalPIDFramePositional<ProportionalElement, IntegralElement, DifferentialElement>::Output (){
+double KalPIDFramePositional<ProportionalElement, IntegralElement, DifferentialElement>::Output_impl (){
 	return proportional_.Output () + integral_.Output () + differential_.Output ();
 }
 

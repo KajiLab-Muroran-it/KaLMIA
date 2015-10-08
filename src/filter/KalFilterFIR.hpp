@@ -33,12 +33,17 @@ public:
 	KalFilterFIR (InputIterator coefficients_begin, InputIterator coefficients_end);
 
 	virtual ~KalFilterFIR() = default;
-	virtual inline void Update (double t, double pv) override { Update (pv); };
-	virtual void Update (double pv);
-
-	virtual double Output() override;
+	
+	// Additional interface
+	void Update (double process_value) { Update_impl (process_value); };
+	
 
 private:
+	virtual void Update_impl (double process_value);
+	virtual inline void Update_impl (double t, double process_value) override { Update_impl (process_value); };
+
+	virtual double Output_impl () override;
+
 	const std::array<double, N> coefficients_;
 	std::deque<double> buffer_;
 	

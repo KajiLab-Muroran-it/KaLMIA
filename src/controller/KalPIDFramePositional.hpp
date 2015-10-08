@@ -37,12 +37,12 @@ public:
 	KalPIDFramePositional (double Kp, double Ki, double Kd);
 	virtual ~KalPIDFramePositional() = default;
 
-	virtual void Update (double t, double process_value);
-	virtual double Output () override;
-
 	void SetTargetValue (double target_value) { setpoint_ = target_value; };
 
 private:
+	virtual void Update_impl (double t, double process_value);
+	virtual double Output_impl () override;
+
 	double t_prev_;
 	double setpoint_;
 	ProportionalElement proportional_;

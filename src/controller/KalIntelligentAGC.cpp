@@ -27,7 +27,7 @@ namespace kalmia {
 			, next_gain_ (0.)
 		{}
 
-		void KalIntelligentAGC::Update (double t, double pv){
+		void KalIntelligentAGC::Update_impl (double t, double pv){
 			if (abs(current_gain_*pv) > clipping_thr_ && clipping_enabled_){
 				current_gain_ = clipping_thr_ / pv;
 			} else if ((abs (pv) < abs (previous_value_)) && ((previous_value_*next_gain_) <= 0)){
@@ -39,7 +39,7 @@ namespace kalmia {
 			previous_value_ = pv;
 		}
 
-		double KalIntelligentAGC::Output (){
+		double KalIntelligentAGC::Output_impl (){
 			return abs (current_gain_);
 		}
 	}

@@ -26,8 +26,12 @@ public:
 	KalFilterBase () = default;
 	virtual ~KalFilterBase () = default;
 
-	virtual void Update (double t, double pv) = 0;
-	virtual double Output () = 0;
+	void Update (double t, double process_value) { Update_impl (t, process_value); };
+	double Output () { return Output_impl (); };
+
+private:
+	virtual void Update_impl (double t, double process_value) = 0;
+	virtual double Output_impl () = 0;
 };
 }
 }

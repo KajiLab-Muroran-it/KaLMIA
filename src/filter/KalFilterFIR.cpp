@@ -25,12 +25,12 @@ KalFilterFIR<N>::KalFilterFIR (InputIterator coefficients_begin, InputIterator c
 , buffer_ (N)
 { }
 template<size_t N>
-void KalFilterFIR<N>::Update (double pv){
+void KalFilterFIR<N>::Update_impl (double pv){
 	buffer_.push_front (pv);
 	buffer_.pop_back();
 }
 template<size_t N>
-double KalFilterFIR<N>::Output (){
+double KalFilterFIR<N>::Output_impl (){
 	return std::inner_product(buffer_.begin(), buffer_.end(), coefficients_.begin(), 0.);
 }
 
