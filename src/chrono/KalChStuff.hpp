@@ -21,7 +21,6 @@
 #include "core/ChSmartPointers.h"
 #include "physics/ChBody.h"
 
-namespace kalmia {
 namespace chrono {
 	// Sphere
 	template <class T>
@@ -66,8 +65,7 @@ namespace chrono {
 		target->GetCollisionModel ()->AddCopyOfAnotherModel (source->GetCollisionModel());
 		return target;
 	}
-}
-}
+}// namespace chrono
 
 #ifdef KALMIA_HEADER_ONLY
 #include "KalChStuff.cpp"
