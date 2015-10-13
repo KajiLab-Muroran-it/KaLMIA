@@ -11,38 +11,21 @@
 /*                                                            */
 /**************************************************************/
 
-// KalControllr.hpp
-
-#ifndef KALFILTERBASE_HPP
-#define KALFILTERBASE_HPP
-
-#include <utility>
-#include "util/KalNoncopyable.hpp"
+// KalFilterBase.cpp
+#include "KalFilterBase.hpp"
 
 namespace kalmia {
 namespace filter {
-class KalFilterBase : kalmia::util::KalNoncopyable{
-public:
-	KalFilterBase () = default;
-	virtual ~KalFilterBase () = default;
 
-	void Update (double t, double process_value) { Update_impl (t, process_value); }
-	double Output ();
-
-	void SetUpperLimit (double limit, bool enabled = true){ upper_limit_ = std::make_pair (enabled, limit); }
-	void SetLowerLimit (double limit, bool enabled = true){ lower_limit_ = std::make_pair (enabled, limit); }
-
-private:
-	virtual void Update_impl (double t, double process_value) = 0;
-	virtual double Output_impl () = 0;
-
-	std::pair<bool, double> upper_limit_, lower_limit_;
-};
+double KalFilterBase::Output (){
+	double output = Output_impl ();
+	if (upper_limit_.first && output >  upper_limit_.second){
+		output = upper_limit_.second;
+	} else if (lower_limit_.first && output < lower_limit_.second){
+		output = lower_limit_.second;
+	}
+	return output;
+}
 
 } // namespace filter
 } // namespace kalmia
-
-#ifdef KALMIA_HEADER_ONLY
-#include "KalFIlterBase.cpp"
-#endif
-#endif
