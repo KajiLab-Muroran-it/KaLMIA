@@ -41,7 +41,10 @@ namespace kalmia {
 			virtual void ComputeDerivative (const State& x, State& dxdt, Time t) = 0;
 
 			const State& GetState (){ return state_; }
+			const typename State::value_type GetState (size_t index){ return state_[index]; }
 			const State& GetState_dt (){ return state_dt_; }
+			const typename State::value_type GetState_dt (size_t index){ return state_dt_[index]; }
+			
 			const Time& GetTime (){ return time_; }
 
 			template<
