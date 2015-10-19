@@ -11,39 +11,39 @@
 /*                                                            */
 /**************************************************************/
 
-// KalFilterFIR.hpp
-// Finite impulse response filter
-#ifndef KALFILTERFIR_HPP
-#define KALFILTERFIR_HPP
+// KalFilterBaseFixedRange.hpp
+#ifndef KALFILTERBASEFIXEDRANGE_HPP
+#define KALFILTERBASEFIXEDRANGE_HPP
 
-#include <assert.h>
-#include <algorithm>
-#include <array>
-#include <numeric>
-#include "filter/KalFilterBaseFixedRange.hpp"
+#include <deque>
+#include "filter/KalFilterBase.hpp"
 
 namespace kalmia {
 namespace filter{
 
-template <size_t N>
-class KalFilterFIR : public KalFilterBaseFixedRange<N>{
-public:
-	template<class InputIterator>
-	KalFilterFIR (InputIterator coefficients_begin, InputIterator coefficients_end);
 
-	virtual ~KalFilterFIR() = default;
+template <size_t N>
+class KalFilterBaseFixedRange : public KalFilterBase{
+public:
+	KalFilterBaseFixedRange () :buffer_ (N) {};
+	virtual ~KalFilterBaseFixedRange() = default;
+
+	using KalFilterBase::Update;
+	// Additional interface
+	void Update (double process_value) { Update_impl (process_value); };
+
+protected:
+	std::deque<double> buffer_;
 
 private:
-	virtual double Output_impl () override;
-
-	const std::array<double, N> coefficients_;
-	
-	template<class InputIterator>
-	static std::array<double, N> InitializeFactors (InputIterator coefficients_begin, InputIterator coefficients_end);
+	virtual void Update_impl (double process_value){
+		buffer_.pop_back ();
+		buffer_.push_front (process_value);
+	};
+	virtual inline void Update_impl (double t, double process_value) override final{ Update_impl (process_value); };
 };
 
-}
-}
+} // namespace filter
+} // namespace kalmia
 
-#include "KalFilterFIR.cpp"
 #endif

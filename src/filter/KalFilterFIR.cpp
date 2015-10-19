@@ -22,19 +22,14 @@ template<size_t N>
 template<class InputIterator>
 KalFilterFIR<N>::KalFilterFIR (InputIterator coefficients_begin, InputIterator coefficients_end)
 : coefficients_ (InitializeFactors(coefficients_begin, coefficients_end))
-, buffer_ (N)
 { }
-template<size_t N>
-void KalFilterFIR<N>::Update_impl (double pv){
-	buffer_.push_front (pv);
-	buffer_.pop_back();
-}
+
+
 template<size_t N>
 double KalFilterFIR<N>::Output_impl (){
 	return std::inner_product(buffer_.begin(), buffer_.end(), coefficients_.begin(), 0.);
 }
 
-// private
 template<size_t N>
 template<class InputIterator>
 static std::array<double, N> KalFilterFIR<N>::InitializeFactors (InputIterator coefficients_begin, InputIterator coefficients_end){
