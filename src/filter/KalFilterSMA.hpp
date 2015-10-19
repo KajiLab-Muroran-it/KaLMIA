@@ -43,5 +43,4 @@ private:
 } // namespace filter
 } // namespace kalmia
 
-#include "KalFilterSMA.cpp"
 #endif
