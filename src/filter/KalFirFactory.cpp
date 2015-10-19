@@ -18,13 +18,6 @@ namespace kalmia {
 namespace filter {
 
 template <size_t N>
-std::unique_ptr<KalFilterFIR<N>> GenerateKalFilterSMA (){
-	std::array<double, N> ar_;
-	std::fill (ar_.begin (), ar_.end (), 1.0 / N);
-	return std::make_unique <KalFilterFIR<N>> (ar_.begin (), ar_.end ());
-}
-
-template <size_t N>
 std::unique_ptr<KalFilterFIR<N>> GenerateKalFilterLWMA (){
 	std::array<double, N> ar_;
 	double w_ = 2. * N / (N*(N + 1));
