@@ -12,8 +12,8 @@
 /**************************************************************/
 
 // KalFilterSMA.hpp
-#ifndef KALFILTERMEDIAN_HPP
-#define KALFILTERMEDIAN_HPP
+#ifndef KALFILTERSMA_HPP
+#define KALFILTERSMA_HPP
 #include <algorithm>
 #include <array>
 #include "filter/KalFilterBaseFixedRange.hpp"
