@@ -20,24 +20,28 @@
 #include <controller/KalControllerBase.hpp>
 
 namespace kalmia {
-	namespace controller {
-		class KalIntelligentAGC : public KalControllerBase {
-		public:
-			KalIntelligentAGC ();
-			KalIntelligentAGC (bool clip, double threshold = 1.);
-			virtual ~KalIntelligentAGC () = default;
+namespace controller {
 
-		private:
-			void Update_impl (double t, double pv) override;
-			double Output_impl () override;
+
+template <size_t Prescaler_Div = 1>
+class KalIntelligentAGC : public KalControllerBase<Prescaler_Div> {
+public:
+	KalIntelligentAGC ();
+	KalIntelligentAGC (bool clip, double threshold = 1.);
+	virtual ~KalIntelligentAGC () = default;
+
+private:
+	void Update_impl (double t, double pv) override;
+	double Output_impl () override;
 		
-			bool clipping_enabled_;
-			double clipping_thr_;
-			double previous_value_, current_gain_, next_gain_;
-		};
-	}
+	bool clipping_enabled_;
+	double clipping_thr_;
+	double previous_value_, current_gain_, next_gain_;
+};
 
-}
+} // namespace controller
+} // namespace kalmia
+
 #ifdef KALMIA_HEADER_ONLY
 #include <controller/KalIntelligentAGC.cpp>
 #endif

@@ -22,8 +22,8 @@
 namespace kalmia {
 namespace controller{
 
-template <class ProportionalElement, class IntegralElement, class DifferentialElement>
-class KalPIDFrameBase : public KalControllerBase{
+template <size_t Prescaler_Div, class ProportionalElement, class IntegralElement, class DifferentialElement>
+class KalPIDFrameBase : public KalControllerBase<Prescaler_Div>{
 	static_assert(std::is_base_of<KalProportionalElementBase, ProportionalElement>::value,
 		"Proportional emement must be inherited form KalProportionalElementBase.");
 	static_assert(std::is_base_of<KalIntegralElementBase, IntegralElement>::value,

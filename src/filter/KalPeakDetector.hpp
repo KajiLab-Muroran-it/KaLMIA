@@ -21,7 +21,8 @@
 namespace kalmia {
 namespace filter{
 
-class KalPeakDetector : public KalFilterBase{
+template <size_t Prescaler_Div = 1>
+class KalPeakDetector : public KalFilterBase<Prescaler_Div>{
 public:
 	KalPeakDetector (bool detect_peak = true, bool detect_bottom = false)
 		: detect_peak_ (detect_peak)

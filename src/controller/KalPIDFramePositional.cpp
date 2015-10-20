@@ -17,8 +17,8 @@
 namespace kalmia {
 namespace controller {
 
-template <class ProportionalElement, class IntegralElement, class DifferentialElement>
-KalPIDFramePositional<ProportionalElement, IntegralElement, DifferentialElement>::KalPIDFramePositional (double Kp, double Ki, double Kd)
+template <size_t Prescaler_Div, class ProportionalElement, class IntegralElement, class DifferentialElement>
+KalPIDFramePositional<Prescaler_Div, ProportionalElement, IntegralElement, DifferentialElement>::KalPIDFramePositional (double Kp, double Ki, double Kd)
 	: t_prev_ (0.)
 	, setpoint_ (0.)
 	, proportional_ (Kp)
@@ -26,8 +26,8 @@ KalPIDFramePositional<ProportionalElement, IntegralElement, DifferentialElement>
 	, differential_ (Kd)
 {}
 
-template <class ProportionalElement, class IntegralElement, class DifferentialElement>
-void KalPIDFramePositional<ProportionalElement, IntegralElement, DifferentialElement>::Update_impl (double t, double process_value){
+template <size_t Prescaler_Div, class ProportionalElement, class IntegralElement, class DifferentialElement>
+void KalPIDFramePositional<Prescaler_Div, ProportionalElement, IntegralElement, DifferentialElement>::Update_impl (double t, double process_value){
 	double dt = t - t_prev_;
 	if (dt > 0.){
 		double error = setpoint_ - process_value;
@@ -39,8 +39,8 @@ void KalPIDFramePositional<ProportionalElement, IntegralElement, DifferentialEle
 }
 
 
-template <class ProportionalElement, class IntegralElement, class DifferentialElement>
-double KalPIDFramePositional<ProportionalElement, IntegralElement, DifferentialElement>::Output_impl (){
+template <size_t Prescaler_Div, class ProportionalElement, class IntegralElement, class DifferentialElement>
+double KalPIDFramePositional<Prescaler_Div, ProportionalElement, IntegralElement, DifferentialElement>::Output_impl (){
 	return proportional_.Output () + integral_.Output () + differential_.Output ();
 }
 

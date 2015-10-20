@@ -22,8 +22,8 @@ namespace kalmia {
 namespace filter{
 
 
-template <size_t N>
-class KalFilterBaseFixedRange : public KalFilterBase{
+template <size_t N, size_t Prescaler_Div>
+class KalFilterBaseFixedRange : public KalFilterBase<Prescaler_Div>{
 public:
 	KalFilterBaseFixedRange () :buffer_ (N) {};
 	virtual ~KalFilterBaseFixedRange() = default;

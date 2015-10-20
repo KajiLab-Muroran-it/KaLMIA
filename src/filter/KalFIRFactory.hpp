@@ -28,24 +28,24 @@ namespace kalmia {
 namespace filter {
 
 // SMA: Simple Moving Average
-template <size_t N>
-std::unique_ptr<KalFilterSMA<N>> GenerateKalFilterSMA () { return std::make_unique<KalFilterSMA<N>> (); };
+template <size_t N, size_t Prescaler_Dim = 1>
+std::unique_ptr<KalFilterSMA<N, Prescaler_Dim>> GenerateKalFilterSMA () { return std::make_unique<KalFilterSMA<N, Prescaler_Dim>> (); };
 
 // LWMA: Linear Weighted Moving Average
-template <size_t N>
-std::unique_ptr<KalFilterFIR<N>> GenerateKalFilterLWMA ();
+template <size_t N, size_t Prescaler_Dim = 1>
+std::unique_ptr<KalFilterFIR<N, Prescaler_Dim>> GenerateKalFilterLWMA ();
 
 // EMA: Exponential Moving Average
-template <size_t N>
-std::unique_ptr<KalFilterFIR<N>> GenerateKalFilterEMA (double alpha);
+template <size_t N, size_t Prescaler_Dim = 1>
+std::unique_ptr<KalFilterFIR<N, Prescaler_Dim>> GenerateKalFilterEMA (double alpha);
 
 // MMA: Modified Moving Average
-template <size_t N>
-inline std::unique_ptr<KalFilterFIR<N>> GenerateKalFilterMMA (){ return GenerateKalFilterEMA (1. / N) };
+template <size_t N, size_t Prescaler_Dim = 1>
+inline std::unique_ptr<KalFilterFIR<N, Prescaler_Dim>> GenerateKalFilterMMA (){ return GenerateKalFilterEMA (1. / N) };
 
 // LPC: Linear Phase Characteristic filter
-template <size_t N, class InputIterator>
-std::unique_ptr<KalFilterFIR<N>> GenerateKalFilterLPC (InputIterator coefficient_begin, InputIterator coefficient_end);
+template <size_t N, class InputIterator, size_t Prescaler_Dim = 1>
+std::unique_ptr<KalFilterFIR<N, Prescaler_Dim>> GenerateKalFilterLPC (InputIterator coefficient_begin, InputIterator coefficient_end);
 
 } // namespace filter
 } // namespace kalmia

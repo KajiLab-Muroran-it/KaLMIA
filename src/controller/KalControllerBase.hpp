@@ -20,7 +20,10 @@
 #include "filter/KalFilterBase.hpp"
 namespace kalmia{
 namespace controller{
-using KalControllerBase = ::kalmia::filter::KalFilterBase;
-}
-}
+
+template <size_t Prescaler_Div>
+using KalControllerBase = ::kalmia::filter::KalFilterBase<Prescaler_Div>;
+
+} // namespace controller
+} // namespace kalmia
 #endif

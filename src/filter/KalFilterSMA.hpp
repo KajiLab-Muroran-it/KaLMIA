@@ -21,8 +21,8 @@
 namespace kalmia {
 namespace filter {
 
-template <size_t N>
-class KalFilterSMA : public KalFilterBaseFixedRange<N> {
+template <size_t N, size_t Prescaler_Div = 1>
+class KalFilterSMA : public KalFilterBaseFixedRange<N, Prescaler_Div> {
 public:
 	KalFilterSMA ():sum_(0.){};
 	virtual ~KalFilterSMA () = default;

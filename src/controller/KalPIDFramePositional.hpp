@@ -24,9 +24,9 @@
 namespace kalmia {
 namespace controller{
 
-template <class ProportionalElement = KalProportionalElement, class IntegralElement = KalIntegralElement, class DifferentialElement = KalDifferentialElementForward>
+template <size_t Prescaler_Div = 1, class ProportionalElement = KalProportionalElement, class IntegralElement = KalIntegralElement, class DifferentialElement = KalDifferentialElementForward>
 
-class KalPIDFramePositional : public KalPIDFrameBase<ProportionalElement, IntegralElement, DifferentialElement>{
+class KalPIDFramePositional : public KalPIDFrameBase<Prescaler_Div, ProportionalElement, IntegralElement, DifferentialElement> {
 
 public:
 	KalPIDFramePositional (double Kp, double Ki, double Kd);
@@ -45,9 +45,12 @@ private:
 	KalDifferentialElement differential_;
 };
 
-using KalPIDFramePositionalPID = KalPIDFramePositional<KalProportionalElement, KalIntegralElement, KalDifferentialElement>;
-using KalPIDFramePositionalPI_D = KalPIDFramePositional<KalProportionalElement, KalIntegralElement, KalDifferentialElementForward>;
-using KalPIDFramePositionalI_PD = KalPIDFramePositional<KalProportionalElementForward, KalIntegralElement, KalDifferentialElementForward>;
+template <size_t Prescaler_Div = 1>
+using KalPIDFramePositionalPID = KalPIDFramePositional<Prescaler_Div, KalProportionalElement, KalIntegralElement, KalDifferentialElement>;
+template <size_t Prescaler_Div = 1>
+using KalPIDFramePositionalPI_D = KalPIDFramePositional<Prescaler_Div, KalProportionalElement, KalIntegralElement, KalDifferentialElementForward>;
+template <size_t Prescaler_Div = 1>
+using KalPIDFramePositionalI_PD = KalPIDFramePositional<Prescaler_Div, KalProportionalElementForward, KalIntegralElement, KalDifferentialElementForward>;
 }
 }
 

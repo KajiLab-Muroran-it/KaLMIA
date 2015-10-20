@@ -25,8 +25,8 @@
 namespace kalmia {
 namespace filter{
 
-template <size_t N>
-class KalFilterFIR : public KalFilterBaseFixedRange<N>{
+template <size_t N, size_t Prescaler_Div = 1>
+class KalFilterFIR : public KalFilterBaseFixedRange<N, Prescaler_Div>{
 public:
 	template<class InputIterator>
 	KalFilterFIR (InputIterator coefficients_begin, InputIterator coefficients_end);

@@ -21,12 +21,14 @@
 
 namespace kalmia {
 namespace filter {
+
+template <size_t Prescaler_Div>
 class KalFilterBase : kalmia::util::KalNoncopyable{
 public:
 	KalFilterBase () = default;
 	virtual ~KalFilterBase () = default;
 
-	void Update (double t, double process_value) { Update_impl (t, process_value); }
+	void Update (double t, double process_value);
 	double Output ();
 
 	void SetUpperLimit (double limit, bool enabled = true){ upper_limit_ = std::make_pair (enabled, limit); }
@@ -36,13 +38,14 @@ private:
 	virtual void Update_impl (double t, double process_value) = 0;
 	virtual double Output_impl () = 0;
 
+	int prescaler_count_;
 	std::pair<bool, double> upper_limit_, lower_limit_;
 };
 
 } // namespace filter
 } // namespace kalmia
 
-#ifdef KALMIA_HEADER_ONLY
+//#ifdef KALMIA_HEADER_ONLY
 #include "KalFIlterBase.cpp"
-#endif
+//#endif
 #endif

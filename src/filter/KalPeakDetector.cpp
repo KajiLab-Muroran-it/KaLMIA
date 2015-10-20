@@ -17,7 +17,8 @@
 namespace kalmia {
 namespace filter{
 
-void KalPeakDetector::Update_impl (double t, double process_value){
+template <size_t Prescaler_Div>
+void KalPeakDetector<Prescaler_Div>::Update_impl (double t, double process_value){
 	on_peak_ = false;
 
 	bool slope = (process_value - prev_value_) > 0.;
