@@ -38,7 +38,7 @@ namespace chrono {
 		return mass / (depth * height * width);
 	}
 
-	double GetGravitionalPotential (::chrono::ChSharedPtr<::chrono::ChBody> body, ::chrono::ChVector<> G_acc){
+	double GetGravitationalPotential (::chrono::ChSharedPtr<::chrono::ChBody> body, ::chrono::ChVector<> G_acc){
 		return -1.* body->GetMass () * G_acc.Dot (body->GetPos ());
 	}
 
