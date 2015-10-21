@@ -30,7 +30,7 @@ public:
 
 	using KalFilterBase::Update;
 	// Additional interface
-	void Update (double process_value) { Update_impl (process_value); };
+	void Update (double process_value) { Update (0., process_value); };
 
 protected:
 	std::deque<double> buffer_;

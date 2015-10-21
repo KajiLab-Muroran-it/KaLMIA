@@ -25,7 +25,7 @@ namespace filter {
 template <size_t Prescaler_Div>
 class KalFilterBase : kalmia::util::KalNoncopyable{
 public:
-	KalFilterBase () = default;
+	KalFilterBase () : prescaler_count_ (0) {};
 	virtual ~KalFilterBase () = default;
 
 	void Update (double t, double process_value);
@@ -38,7 +38,7 @@ private:
 	virtual void Update_impl (double t, double process_value) = 0;
 	virtual double Output_impl () = 0;
 
-	int prescaler_count_;
+	unsigned int prescaler_count_;
 	std::pair<bool, double> upper_limit_, lower_limit_;
 };
 
