@@ -11,33 +11,40 @@
 /*                                                            */
 /**************************************************************/
 
-// KalFilterSMA.hpp
-// SMA: Simple Moving Average
-#ifndef KALFILTERSMA_HPP
-#define KALFILTERSMA_HPP
+// KalFilterCA.hpp
+// CA: Cumulative moving Average (=overall average)
+
+#ifndef KALFILTERCA_HPP
+#define KALFILTERCA_HPP
 #include <algorithm>
-#include <array>
-#include "filter/KalFilterBaseFixedRange.hpp"
+#include "filter/KalFilterBase.hpp"
 
 namespace kalmia {
 namespace filter {
 
-template <size_t N, size_t Prescaler_Div = 1>
-class KalFilterSMA : public KalFilterBaseFixedRange<N, Prescaler_Div> {
+template <size_t Prescaler_Div = 1>
+class KalFilterCA : public KalFilterBase<Prescaler_Div> {
 public:
-	KalFilterSMA ():sum_(0.){};
-	virtual ~KalFilterSMA () = default;
+	KalFilterCA ():n_(0), sum_(0.){};
+	virtual ~KalFilterCA () = default;
+
+	using KalFilterBase::Update;
+	// Additional interface
+	void Update (double process_value) { Update_impl (process_value); };
 
 private:
+	virtual void Update_impl (double t, double process_value) { Update_impl (process_value); }
 	virtual void Update_impl (double process_value){
 		sum_ += process_value;
-		sum_ -= buffer_.back ();
-		buffer_.pop_back ();
-		buffer_.push_front (process_value);
+		++n_;
 	}
 
-	virtual double Output_impl () override final { return sum_/N; }
-
+	virtual double Output_impl () override{
+		if (n_){ return sum_ / n_; }
+		else { return 0.; }
+	}
+	
+	unsigned int n_;
 	double sum_;
 };
 

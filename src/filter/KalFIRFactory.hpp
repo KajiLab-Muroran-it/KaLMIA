@@ -23,6 +23,7 @@
 #include <numeric>
 #include "filter/KalFilterSMA.hpp"
 #include "filter/KalFilterFIR.hpp"
+#include "filter/KalFilterCA.hpp"
 
 namespace kalmia {
 namespace filter {
@@ -47,6 +48,9 @@ inline std::unique_ptr<KalFilterFIR<N, Prescaler_Dim>> GenerateKalFilterMMA (){ 
 template <size_t N, class InputIterator, size_t Prescaler_Dim = 1>
 std::unique_ptr<KalFilterFIR<N, Prescaler_Dim>> GenerateKalFilterLPC (InputIterator coefficient_begin, InputIterator coefficient_end);
 
+// CA: Cumulative moving Average (=overall average)
+template <size_t Prescaler_Dim = 1>
+std::unique_ptr<KalFilterCA<Prescaler_Dim>> GenerateKalFilterCA () { return std::make_unique<KalFilterCA<Prescaler_Dim>> (); };
 } // namespace filter
 } // namespace kalmia
 
