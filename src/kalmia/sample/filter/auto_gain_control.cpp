@@ -34,7 +34,7 @@ int main (int argc, char** argv[])
 	std::vector<std::tuple<double, double, double, double>> log;
 
 
-	kalmia::controller::KalIntelligentAGC agc (true, 0.5);
+	kalmia::controller::KalIntelligentAGC<> agc (true, 0.5);
 
 	for (int i = 0; i<k_pts; ++i){
 		double t = k_period / (double)k_pts * i;

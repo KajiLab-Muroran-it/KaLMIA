@@ -28,7 +28,7 @@ public:
 	KalFilterBaseFixedRange () :buffer_ (N) {};
 	virtual ~KalFilterBaseFixedRange() = default;
 
-	using KalFilterBase::Update;
+	using KalFilterBase<Prescaler_Div>::Update;
 	// Additional interface
 	void Update (double process_value) { Update (0., process_value); };
 

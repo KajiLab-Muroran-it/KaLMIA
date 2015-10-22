@@ -28,7 +28,7 @@ public:
 	KalFilterCA ():n_(0), sum_(0.){};
 	virtual ~KalFilterCA () = default;
 
-	using KalFilterBase::Update;
+	using KalFilterBase<Prescaler_Div>::Update;
 	// Additional interface
 	void Update (double process_value) { Update_impl (process_value); };
 
