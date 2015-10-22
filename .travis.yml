@@ -1,4 +1,12 @@
+addons:
+    apt:
+        sources:
+            - llvm-toolchain-precise
+            - ubuntu-toolchain-r-test
+        packages:
+            - clang-3.7
+            - g++-5
+            - gcc-5
 language: cpp
 script:
-  - g++ --version
-  - g++ -Wall -Wextra -pedantic src/kalmia/sample/filter/noise_reduction_sma.cpp && ./a.out
+    - g++-5 -std=c++1y -Wall -Wextra -pedantic -I src/  src/kalmia/sample/filter/auto_gain_control.cpp && ./a.out
