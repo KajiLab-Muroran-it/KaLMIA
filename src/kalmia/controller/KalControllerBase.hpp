@@ -11,32 +11,19 @@
 /*                                                            */
 /**************************************************************/
 
-// KalXxx.hpp
-// This is a class library header template.
-// Rename "Xxx" and "XXX"(Upper case, use for #define directive) in this file to your class name.
-// Also, Write description of file/class here.
+// KalController.hpp
 
-// Include guard 
-#ifndef KALXXX_HPP
-#define KALXXX_HPP
 
-namespace kalmia {
-namespace category{
+#ifndef KALCONTROLLER_HPP
+#define KALCONTROLLER_HPP
 
-class KalXxx : kalmia::util::KalNoncopyable{
-public:
-	virtual ~KalXxx() = default;
-	
-};
+#include "kalmia/filter/KalFilterBase.hpp"
+namespace kalmia{
+namespace controller{
 
-}
-}
+template <size_t Prescaler_Div>
+using KalControllerBase = ::kalmia::filter::KalFilterBase<Prescaler_Div>;
 
-// If you used templates in your class/function,
-// you'll need to include implementations of them in this file.
-// In such case, comment-out or delete #ifdef and 1st #endif line.
-// Don't delete #include line, and 2nd #endif line!
-#ifdef KALMIA_HEADER_ONLY
-#include "KalXxx.cpp"
-#endif
+} // namespace controller
+} // namespace kalmia
 #endif

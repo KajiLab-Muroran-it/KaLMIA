@@ -16,7 +16,7 @@
 #define KALFILTERMEDIAN_HPP
 #include <algorithm>
 #include <array>
-#include "filter/KalFilterBaseFixedRange.hpp"
+#include "kalmia/filter/KalFilterBaseFixedRange.hpp"
 
 namespace kalmia {
 namespace filter{

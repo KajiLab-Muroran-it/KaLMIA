@@ -16,7 +16,7 @@
 #ifndef KALDifferentialELEM_HPP
 #define KALDifferentialELEM_HPP
 
-#include "controller/KalPIDElementBase.hpp"
+#include "kalmia/controller/KalPIDElementBase.hpp"
 
 namespace kalmia {
 namespace controller{

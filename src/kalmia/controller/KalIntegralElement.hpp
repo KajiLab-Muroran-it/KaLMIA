@@ -11,19 +11,30 @@
 /*                                                            */
 /**************************************************************/
 
-// KalController.hpp
+// KalIntegralElem.hpp
 
+#ifndef KALINTEGRALELEM_HPP
+#define KALINTEGRALELEM_HPP
 
-#ifndef KALCONTROLLER_HPP
-#define KALCONTROLLER_HPP
+#include "kalmia/controller/KalPIDElementBase.hpp"
 
-#include "filter/KalFilterBase.hpp"
-namespace kalmia{
+namespace kalmia {
 namespace controller{
 
-template <size_t Prescaler_Div>
-using KalControllerBase = ::kalmia::filter::KalFilterBase<Prescaler_Div>;
+class KalIntegralElement : public KalIntegralElementBase{
+public:
+	KalIntegralElement(double Ki) : gain_ (Ki), total_error_(0.) {};
+	virtual ~KalIntegralElement() = default;
 
-} // namespace controller
-} // namespace kalmia
+private:
+	virtual void Update_impl (double dt, double process_value, double error) override { total_error_ += error*dt; };
+	virtual double Output_impl () override { return gain_ * total_error_; };
+
+	const double gain_;
+	double total_error_;
+};
+
+}
+}
+
 #endif

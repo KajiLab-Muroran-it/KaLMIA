@@ -9,7 +9,7 @@
 #include <fstream>
 
 #define KALMIA_HEADER_ONLY
-#include "filter/KalFIRFactory.hpp"
+#include "kalmia/filter/KalFIRFactory.hpp"
 
 int main (int argc, char* argv[])
 {

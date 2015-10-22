@@ -17,7 +17,7 @@
 #define KALKALPIDEMEMENTBASE_HPP
 
 #include <math.h>
-#include "util/KalNoncopyable.hpp"
+#include "kalmia/util/KalNoncopyable.hpp"
 
 namespace kalmia {
 namespace controller {

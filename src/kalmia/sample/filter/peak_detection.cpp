@@ -9,7 +9,7 @@
 #include <fstream>
 
 #define KALMIA_HEADER_ONLY
-#include "filter/KalPeakDetector.hpp"
+#include "kalmia/filter/KalPeakDetector.hpp"
 
 int main (int argc, char** argv[])
 {

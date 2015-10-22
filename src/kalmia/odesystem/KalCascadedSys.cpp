@@ -11,3 +11,9 @@
 /*                                                            */
 /**************************************************************/
 
+// KalCascadedSys.cpp
+#include "KalCascadedSys.hpp"
+
+namespace kalmia {
+
+}

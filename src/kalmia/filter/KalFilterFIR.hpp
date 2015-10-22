@@ -11,30 +11,39 @@
 /*                                                            */
 /**************************************************************/
 
-// KalIntegralElem.hpp
+// KalFilterFIR.hpp
+// Finite impulse response filter
+#ifndef KALFILTERFIR_HPP
+#define KALFILTERFIR_HPP
 
-#ifndef KALINTEGRALELEM_HPP
-#define KALINTEGRALELEM_HPP
-
-#include "controller/KalPIDElementBase.hpp"
+#include <assert.h>
+#include <algorithm>
+#include <array>
+#include <numeric>
+#include "kalmia/filter/KalFilterBaseFixedRange.hpp"
 
 namespace kalmia {
-namespace controller{
+namespace filter{
 
-class KalIntegralElement : public KalIntegralElementBase{
+template <size_t N, size_t Prescaler_Div = 1>
+class KalFilterFIR : public KalFilterBaseFixedRange<N, Prescaler_Div>{
 public:
-	KalIntegralElement(double Ki) : gain_ (Ki), total_error_(0.) {};
-	virtual ~KalIntegralElement() = default;
+	template<class InputIterator>
+	KalFilterFIR (InputIterator coefficients_begin, InputIterator coefficients_end);
+
+	virtual ~KalFilterFIR() = default;
 
 private:
-	virtual void Update_impl (double dt, double process_value, double error) override { total_error_ += error*dt; };
-	virtual double Output_impl () override { return gain_ * total_error_; };
+	virtual double Output_impl () override;
 
-	const double gain_;
-	double total_error_;
+	const std::array<double, N> coefficients_;
+	
+	template<class InputIterator>
+	static std::array<double, N> InitializeFactors (InputIterator coefficients_begin, InputIterator coefficients_end);
 };
 
 }
 }
 
+#include "KalFilterFIR.cpp"
 #endif

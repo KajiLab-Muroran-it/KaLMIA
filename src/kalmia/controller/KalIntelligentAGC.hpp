@@ -11,44 +11,38 @@
 /*                                                            */
 /**************************************************************/
 
-// KalFilterCA.hpp
-// CA: Cumulative moving Average (=overall average)
+// KalIntelligentAGC.hpp
 
-#ifndef KALFILTERCA_HPP
-#define KALFILTERCA_HPP
-#include <algorithm>
-#include "filter/KalFilterBase.hpp"
+#ifndef KALINTELLIGENTAGC_HPP
+#define KALINTELLIGENTAGC_HPP
+
+#include <cmath>
+#include "kalmia/controller/KalControllerBase.hpp"
 
 namespace kalmia {
-namespace filter {
+namespace controller {
+
 
 template <size_t Prescaler_Div = 1>
-class KalFilterCA : public KalFilterBase<Prescaler_Div> {
+class KalIntelligentAGC : public KalControllerBase<Prescaler_Div> {
 public:
-	KalFilterCA ():n_(0), sum_(0.){};
-	virtual ~KalFilterCA () = default;
-
-	using KalFilterBase::Update;
-	// Additional interface
-	void Update (double process_value) { Update_impl (process_value); };
+	KalIntelligentAGC ();
+	KalIntelligentAGC (bool clip, double threshold = 1.);
+	virtual ~KalIntelligentAGC () = default;
 
 private:
-	virtual void Update_impl (double t, double process_value) { Update_impl (process_value); }
-	virtual void Update_impl (double process_value){
-		sum_ += process_value;
-		++n_;
-	}
-
-	virtual double Output_impl () override{
-		if (n_){ return sum_ / n_; }
-		else { return 0.; }
-	}
-	
-	unsigned int n_;
-	double sum_;
+	void Update_impl (double t, double pv) override;
+	double Output_impl () override;
+		
+	bool clipping_enabled_;
+	double clipping_thr_;
+	double previous_value_, current_gain_, next_gain_;
 };
 
-} // namespace filter
+} // namespace controller
 } // namespace kalmia
 
+#ifdef KALMIA_HEADER_ONLY
+#include "kalmia/controller/KalIntelligentAGC.cpp"
+#endif
 #endif

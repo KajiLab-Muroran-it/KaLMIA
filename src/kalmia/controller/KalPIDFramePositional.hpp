@@ -16,10 +16,10 @@
 #ifndef KALPIDFRAMEPOSITIONAL_HPP
 #define KALPIDFRAMEPOSITIONAL_HPP
 
-#include "controller/KalPIDFrameBase.hpp"
-#include "controller/KalProportionalElement.hpp"
-#include "controller/KalIntegralElement.hpp"
-#include "controller/KalDifferentialElement.hpp"
+#include "kalmia/controller/KalPIDFrameBase.hpp"
+#include "kalmia/controller/KalProportionalElement.hpp"
+#include "kalmia/controller/KalIntegralElement.hpp"
+#include "kalmia/controller/KalDifferentialElement.hpp"
 
 namespace kalmia {
 namespace controller{

@@ -16,7 +16,7 @@
 #define KALFILTERBASEFIXEDRANGE_HPP
 
 #include <deque>
-#include "filter/KalFilterBase.hpp"
+#include "kalmia/filter/KalFilterBase.hpp"
 
 namespace kalmia {
 namespace filter{

@@ -11,37 +11,41 @@
 /*                                                            */
 /**************************************************************/
 
-// KalFilterSMA.hpp
-// SMA: Simple Moving Average
-#ifndef KALFILTERSMA_HPP
-#define KALFILTERSMA_HPP
-#include <algorithm>
-#include <array>
-#include "filter/KalFilterBaseFixedRange.hpp"
+// KalControllr.hpp
+
+#ifndef KALFILTERBASE_HPP
+#define KALFILTERBASE_HPP
+
+#include <utility>
+#include "kalmia/util/KalNoncopyable.hpp"
 
 namespace kalmia {
 namespace filter {
 
-template <size_t N, size_t Prescaler_Div = 1>
-class KalFilterSMA : public KalFilterBaseFixedRange<N, Prescaler_Div> {
+template <size_t Prescaler_Div>
+class KalFilterBase : kalmia::util::KalNoncopyable{
 public:
-	KalFilterSMA ():sum_(0.){};
-	virtual ~KalFilterSMA () = default;
+	KalFilterBase () : prescaler_count_ (0) {};
+	virtual ~KalFilterBase () = default;
+
+	void Update (double t, double process_value);
+	double Output ();
+
+	void SetUpperLimit (double limit, bool enabled = true){ upper_limit_ = std::make_pair (enabled, limit); }
+	void SetLowerLimit (double limit, bool enabled = true){ lower_limit_ = std::make_pair (enabled, limit); }
 
 private:
-	virtual void Update_impl (double process_value){
-		sum_ += process_value;
-		sum_ -= buffer_.back ();
-		buffer_.pop_back ();
-		buffer_.push_front (process_value);
-	}
+	virtual void Update_impl (double t, double process_value) = 0;
+	virtual double Output_impl () = 0;
 
-	virtual double Output_impl () override final { return sum_/N; }
-
-	double sum_;
+	unsigned int prescaler_count_;
+	std::pair<bool, double> upper_limit_, lower_limit_;
 };
 
 } // namespace filter
 } // namespace kalmia
 
+//#ifdef KALMIA_HEADER_ONLY
+#include "KalFIlterBase.cpp"
+//#endif
 #endif

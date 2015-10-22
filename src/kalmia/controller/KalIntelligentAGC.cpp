@@ -12,7 +12,7 @@
 /**************************************************************/
 
 // KalIntelligentAGC.cpp
-#include <controller/KalIntelligentAGC.hpp>
+#include "kalmia/controller/KalIntelligentAGC.hpp"
 namespace kalmia {
 namespace controller {
 

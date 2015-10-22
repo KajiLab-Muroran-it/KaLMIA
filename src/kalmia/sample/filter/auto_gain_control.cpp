@@ -22,7 +22,7 @@
 #include <fstream>
 
 #define KALMIA_HEADER_ONLY
-#include "controller/KalIntelligentAGC.hpp"
+#include "kalmia/controller/KalIntelligentAGC.hpp"
 
 int main (int argc, char** argv[])
 {

@@ -16,8 +16,8 @@
 #ifndef KALPIDFRAMEBASE_HPP
 #define KALPIDFRAMEBASE_HPP
 
-#include "controller/KalControllerBase.hpp"
-#include "controller/KalPIDElementBase.hpp"
+#include "kalmia/controller/KalControllerBase.hpp"
+#include "kalmia/controller/KalPIDElementBase.hpp"
 
 namespace kalmia {
 namespace controller{

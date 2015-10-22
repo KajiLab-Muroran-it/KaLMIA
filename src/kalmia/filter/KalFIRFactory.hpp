@@ -21,9 +21,9 @@
 #include <memory>
 #include <algorithm>
 #include <numeric>
-#include "filter/KalFilterSMA.hpp"
-#include "filter/KalFilterFIR.hpp"
-#include "filter/KalFilterCA.hpp"
+#include "kalmia/filter/KalFilterSMA.hpp"
+#include "kalmia/filter/KalFilterFIR.hpp"
+#include "kalmia/filter/KalFilterCA.hpp"
 
 namespace kalmia {
 namespace filter {

@@ -16,7 +16,7 @@
 #ifndef KALPROPORTIONALELEM_HPP
 #define KALPROPORTIONALELEM_HPP
 
-#include "controller/KalPIDElementBase.hpp"
+#include "kalmia/controller/KalPIDElementBase.hpp"
 
 namespace kalmia {
 namespace controller{

@@ -12,7 +12,7 @@
 /**************************************************************/
 
 // KalVanDerPolCascaded.cpp
-#include "KalVANDERPOLCASCADED.hpp"
+#include "KalVanDerPolCascaded.hpp"
 
 namespace kalmia {
 	namespace odesys {

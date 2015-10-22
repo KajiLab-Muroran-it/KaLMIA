@@ -11,38 +11,47 @@
 /*                                                            */
 /**************************************************************/
 
-// KalIntelligentAGC.hpp
+// KalPeakDetector.hpp
 
-#ifndef KALINTELLIGENTAGC_HPP
-#define KALINTELLIGENTAGC_HPP
+#ifndef KALPEAKDETECTOR_HPP
+#define KALPEAKDETECTOR_HPP
 
-#include <cmath>
-#include <controller/KalControllerBase.hpp>
+#include "kalmia/filter/KalFilterBase.hpp"
 
 namespace kalmia {
-namespace controller {
-
+namespace filter{
 
 template <size_t Prescaler_Div = 1>
-class KalIntelligentAGC : public KalControllerBase<Prescaler_Div> {
+class KalPeakDetector : public KalFilterBase<Prescaler_Div>{
 public:
-	KalIntelligentAGC ();
-	KalIntelligentAGC (bool clip, double threshold = 1.);
-	virtual ~KalIntelligentAGC () = default;
+	KalPeakDetector (bool detect_peak = true, bool detect_bottom = false)
+		: detect_peak_ (detect_peak)
+		, detect_bottom_ (detect_bottom)
+		, on_peak_ (false)
+		, prev_slope_ (true)
+		, peak_amplitude_ (0.) {}
+
+	virtual ~KalPeakDetector() = default;
+
+	bool OnPeak () { return on_peak_; };
 
 private:
-	void Update_impl (double t, double pv) override;
-	double Output_impl () override;
-		
-	bool clipping_enabled_;
-	double clipping_thr_;
-	double previous_value_, current_gain_, next_gain_;
+	virtual void Update_impl (double t, double process_value) override;
+	virtual double Output_impl () override { return peak_amplitude_; };
+
+	const bool detect_peak_;
+	const bool detect_bottom_;
+
+	bool on_peak_;
+	bool prev_slope_; // true for positive slope
+	double peak_amplitude_;
+	double prev_value_;
 };
 
-} // namespace controller
+} // namespace filter
 } // namespace kalmia
 
 #ifdef KALMIA_HEADER_ONLY
-#include <controller/KalIntelligentAGC.cpp>
+#include "KalPeakDetector.cpp"
 #endif
 #endif
