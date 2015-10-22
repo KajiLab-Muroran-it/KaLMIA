@@ -68,7 +68,5 @@ namespace chrono {
 	}
 }// namespace chrono
 
-#ifdef KALMIA_HEADER_ONLY
-#include "KalChStuff.cpp"
-#endif
+
 #endif
