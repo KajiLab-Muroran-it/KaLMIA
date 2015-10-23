@@ -23,6 +23,7 @@ namespace filter{
 
 template <size_t N, size_t Prescaler_Div = 1>
 class KalFilterMedian : public KalFilterBaseFixedRange<N, Prescaler_Div>{
+	using KalFilterBaseFixedRange<N, Prescaler_Div>::buffer_;
 public:
 	virtual ~KalFilterMedian() = default;
 
@@ -35,14 +36,13 @@ private:
 		return GetMedianFunctor<Is_Odd>::Get(move(buf_copy));
 	};
 
-	template<bool> struct GetMedianFunctor {};
-	template<> struct GetMedianFunctor<false> {
+	template<bool U, bool = false> struct GetMedianFunctor {
 		static double Get (std::array<double, N> && buf_copy){
 			std::sort (buf_copy.begin (), buf_copy.end ());
 			return (buf_copy[N / 2 - 1] + buf_copy[N / 2]) / 2.;
 		};
 	};
-	template<> struct GetMedianFunctor<true> {
+	template<bool V> struct GetMedianFunctor<true, V> {
 		static double Get (std::array<double, N> &&buf_copy){
 			nth_element (buf_copy.begin (), buf_copy.begin () + N/2 , buf_copy.end ());
 			return buf_copy[N/2];
