@@ -32,20 +32,21 @@ KalIntelligentAGC<Prescaler_Div>::KalIntelligentAGC (bool clip, double threshold
 
 template <size_t Prescaler_Div>
 void KalIntelligentAGC<Prescaler_Div>::Update_impl (double t, double pv){
-	if (abs(current_gain_*pv) > clipping_thr_ && clipping_enabled_){
+	if (fabs(current_gain_*pv) > clipping_thr_ && clipping_enabled_){
 		current_gain_ = clipping_thr_ / pv;
-	} else if ((abs (pv) < abs (previous_value_)) && ((previous_value_*next_gain_) <= 0)){
+	} else if ((fabs (pv) < fabs (previous_value_)) && ((previous_value_*next_gain_) <= 0)){
 		next_gain_ = 1. / previous_value_;
 	} else if ((previous_value_*pv) <= 0){
 		current_gain_ = next_gain_;
 	}
 
 	previous_value_ = pv;
+	
 }
 
 template <size_t Prescaler_Div>
 double KalIntelligentAGC<Prescaler_Div>::Output_impl (){
-	return abs (current_gain_);
+	return fabs (current_gain_);
 }
 
 } // namespace controller

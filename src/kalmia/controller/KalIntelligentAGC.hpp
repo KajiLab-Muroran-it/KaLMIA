@@ -31,8 +31,8 @@ public:
 	virtual ~KalIntelligentAGC () = default;
 
 private:
-	void Update_impl (double t, double pv) override;
-	double Output_impl () override;
+	virtual void Update_impl (double t, double pv) override;
+	virtual double Output_impl () override;
 		
 	bool clipping_enabled_;
 	double clipping_thr_;
