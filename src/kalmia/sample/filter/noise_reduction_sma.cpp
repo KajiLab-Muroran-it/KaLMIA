@@ -11,7 +11,7 @@
 #define KALMIA_HEADER_ONLY
 #include "kalmia/filter/KalFIRFactory.hpp"
 
-int main (int argc, char* argv[])
+int main ()
 {
 	const int k_pts = 1000;
 	const double k_step = 10e-3;

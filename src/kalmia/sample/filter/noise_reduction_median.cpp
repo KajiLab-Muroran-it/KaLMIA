@@ -10,7 +10,7 @@
 #define KALMIA_HEADER_ONLY
 #include "kalmia/filter/KalFilterMedian.hpp"
 
-int main(int argc, char* argv[])
+int main ()
 {
 
 	std::random_device rd;
