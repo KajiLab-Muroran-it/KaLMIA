@@ -20,7 +20,7 @@ int main ()
 
 	std::vector<std::tuple<double, double, double, int>> log;
 
-	kalmia::filter::KalPeakDetector peak(false, true);
+	kalmia::filter::KalPeakDetector<> peak(false, true);
 
 	for (int i = 0; i<k_pts; ++i){
 		double t = k_period / (double)k_pts * i;
