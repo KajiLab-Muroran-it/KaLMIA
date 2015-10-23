@@ -10,3 +10,5 @@ addons:
 language: cpp
 script:
     - g++-5 -std=c++1y -Wall -Wextra -pedantic -I src/  src/kalmia/sample/filter/auto_gain_control.cpp && ./a.out
+    - g++-5 -std=c++1y -Wall -Wextra -pedantic -I src/  src/kalmia/sample/filter/peak_detection.cpp && ./a.out
+    - g++-5 -std=c++1y -Wall -Wextra -pedantic -I src/  src/kalmia/sample/filter/noise_reduction_sma.cpp && ./a.out
