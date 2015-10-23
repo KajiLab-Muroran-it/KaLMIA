@@ -27,6 +27,7 @@ namespace filter{
 
 template <size_t N, size_t Prescaler_Div = 1>
 class KalFilterFIR : public KalFilterBaseFixedRange<N, Prescaler_Div>{
+using KalFilterBaseFixedRange<N, Prescaler_Div>::buffer_;
 public:
 	template<class InputIterator>
 	KalFilterFIR (InputIterator coefficients_begin, InputIterator coefficients_end);

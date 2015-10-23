@@ -24,6 +24,8 @@ namespace filter {
 
 template <size_t N, size_t Prescaler_Div = 1>
 class KalFilterSMA : public KalFilterBaseFixedRange<N, Prescaler_Div> {
+using KalFilterBaseFixedRange<N, Prescaler_Div>::buffer_;
+
 public:
 	KalFilterSMA ():sum_(0.){};
 	virtual ~KalFilterSMA () = default;
