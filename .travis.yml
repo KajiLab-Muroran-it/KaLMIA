@@ -15,5 +15,5 @@ script:
     - g++-5 -std=c++1y -Wall -Wextra -pedantic -I src/  src/kalmia/tests/filter/noise_reduction_median.cpp && ./a.out
 
 notifications:
-	- on_success: never
-	- on_failure: never
+    - on_success: never
+    - on_failure: never
