@@ -34,7 +34,7 @@ private:
 	virtual void Update_impl (double process_value){
 		sum_ += process_value;
 		sum_ -= buffer_.back ();
-		buffer_.pop_back ();
+		//buffer_.pop_back ();
 		buffer_.push_front (process_value);
 	}
 

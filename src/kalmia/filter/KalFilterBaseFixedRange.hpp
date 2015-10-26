@@ -17,6 +17,7 @@
 
 #include <deque>
 #include "kalmia/filter/KalFilterBase.hpp"
+#include "boost/circular_buffer.hpp"
 
 namespace kalmia {
 namespace filter{
@@ -25,7 +26,8 @@ namespace filter{
 template <size_t N, size_t Prescaler_Div>
 class KalFilterBaseFixedRange : public KalFilterBase<Prescaler_Div>{
 public:
-	KalFilterBaseFixedRange () :buffer_ (N) {};
+	//KalFilterBaseFixedRange () :buffer_ (N) {};
+	KalFilterBaseFixedRange () :buffer_ (N, 0.0) {};
 	virtual ~KalFilterBaseFixedRange() = default;
 
 	using KalFilterBase<Prescaler_Div>::Update;
@@ -33,11 +35,12 @@ public:
 	void Update (double process_value) { Update (0., process_value); };
 
 protected:
-	std::deque<double> buffer_;
+	//std::deque<double> buffer_;
+	boost::circular_buffer<double> buffer_;
 
 private:
 	virtual void Update_impl (double process_value){
-		buffer_.pop_back ();
+		//buffer_.pop_back ();
 		buffer_.push_front (process_value);
 	};
 	virtual inline void Update_impl (double t, double process_value) override final{ Update_impl (process_value); };
