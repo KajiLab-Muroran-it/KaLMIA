@@ -17,12 +17,12 @@
 #define KALKALPIDEMEMENTBASE_HPP
 
 #include <math.h>
-#include "kalmia/util/KalNoncopyable.hpp"
+#include "boost/noncopyable.hpp"
 
 namespace kalmia {
 namespace controller {
 
-class KalPIDElementBase : kalmia::util::KalNoncopyable {
+class KalPIDElementBase : boost::noncopyable {
 public:
 	virtual ~KalPIDElementBase () = default;
 
