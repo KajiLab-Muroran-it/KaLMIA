@@ -23,7 +23,7 @@ namespace kalmia {
 namespace filter {
 
 template <size_t Prescaler_Div>
-class KalFilterBase : kalmia::util::KalNoncopyable{
+class KalFilterBase : boost::noncopyable{
 public:
 	KalFilterBase () : prescaler_count_ (0) {};
 	virtual ~KalFilterBase () = default;
