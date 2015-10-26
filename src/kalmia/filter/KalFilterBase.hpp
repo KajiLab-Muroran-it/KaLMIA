@@ -18,6 +18,7 @@
 
 #include <utility>
 #include "kalmia/util/KalNoncopyable.hpp"
+#include "boost/noncopyable.hpp"
 
 namespace kalmia {
 namespace filter {
