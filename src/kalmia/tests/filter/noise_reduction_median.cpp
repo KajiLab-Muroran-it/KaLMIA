@@ -41,7 +41,7 @@ int main ()
 	// Unpack the data and output to csv file.
 	std::ofstream ofs ("output.csv");
 	ofs << "t, actual, input, output" << std::endl;
-	for (auto elem : data){
+	for (const auto&& elem : data){
 		double t, actual, input, output;
 		std::tie (t, actual, input, output) = elem;
 		ofs << t << "," << actual << "," << input << "," << output << std::endl;

@@ -33,7 +33,7 @@ int main ()
 
 	std::ofstream ofs ("./output.csv");
 	{
-		for (auto elem : log){
+		for (const auto&& elem : log){
 			double t, input, ampl;
 			int flag;
 

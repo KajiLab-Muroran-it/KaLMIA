@@ -47,7 +47,7 @@ int main ()
 	std::ofstream ofs ("./output.csv");
 	ofs << "time, input, output, gain" << std::endl;
 
-	for (auto elem : log){
+	for (const auto&& elem : log){
 		double t, input, output, gain;
 		std::tie (t, input, output, gain) = elem;
 		ofs << t << "," << input << "," << output << "," << gain << std::endl;

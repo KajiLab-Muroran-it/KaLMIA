@@ -21,7 +21,7 @@ template <size_t N, size_t Prescaler_Dim>
 std::unique_ptr<KalFilterFIR<N, Prescaler_Dim>> GenerateKalFilterLWMA (){
 	std::array<double, N> ar_;
 	double w_ = 2. * N / (N*(N + 1));
-	for (auto elem : ar_){
+	for (auto&& elem : ar_){
 		elem = w_;
 		w_ -= 2. / (N*(N + 1));
 	}
